@@ -1,6 +1,6 @@
 # hide-rs
 
-A steganography library in Rust that uses the Binary Linear Transformation Matrix (BLTM) method for hiding messages in images.
+A steganography library in Rust that uses the Binary Lower Triangular Matrix (BLTM) method for hiding messages in images.
 
 ## Features
 
