@@ -11,6 +11,7 @@ categories = ["cryptography", "multimedia"]
 
 [dependencies]
 bitvec = "1.0.1"
+clap = { version = "4.5.31", features = ["derive"] }
 image = "0.25.5"
 rand = "0.9.0"
 thiserror = "2.0.12"
