@@ -95,12 +95,12 @@ pub fn bytes_to_bits(bytes: &[u8]) -> BitVec<u8, Msb0> {
 /// Convert a bit vector to a sequence of bytes
 ///
 /// # Arguments
-/// * `bits` - The bit vector to convert
+/// * `bits` - The bits to convert
 ///
 /// # Returns
 /// * A vector of bytes constructed from the input bits
 /// * If the bit vector length is not a multiple of 8, the last byte is padded with 0s
-pub fn bits_to_bytes(bits: &BitVec<u8, Msb0>) -> Vec<u8> {
+pub fn bits_to_bytes(bits: &BitSlice<u8, Msb0>) -> Vec<u8> {
     let mut bytes = Vec::with_capacity((bits.len() + 7) / 8);
     let mut byte = 0u8;
     let mut bit_count = 0;
