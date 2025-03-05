@@ -6,6 +6,12 @@ use bitvec::prelude::*;
 #[derive(Debug, Clone)]
 pub struct BLTM3x3;
 
+impl Default for BLTM3x3 {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl BLTM3x3 {
     /// Create a new 3x3 BLTM
     pub fn new() -> Self {
