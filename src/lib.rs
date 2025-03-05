@@ -4,10 +4,10 @@
 //! (BLTM) method for hiding messages within images. This library provides functionality to
 //! encode messages into images and decode them back without visible changes to the image.
 
-mod bltm;
-mod decoder;
-mod encoder;
-mod error;
+pub mod bltm;
+pub mod decoder;
+pub mod encoder;
+pub mod error;
 pub mod img;
 pub mod utils;
 
