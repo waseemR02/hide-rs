@@ -4,6 +4,7 @@ use image::{DynamicImage, GenericImageView, ImageBuffer, Pixel, Rgb, Rgba};
 use std::path::Path;
 
 /// Represents an image that can be used for steganography
+#[derive(Clone)]
 pub struct StegoImage {
     /// The underlying image data
     image: DynamicImage,
