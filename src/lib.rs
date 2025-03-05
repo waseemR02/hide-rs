@@ -10,6 +10,7 @@ pub mod decoder;
 pub mod encoder;
 pub mod error;
 pub mod img;
+pub mod raw_decoder;
 pub mod utils;
 
 /// The result type returned by functions in this library.
