@@ -76,8 +76,8 @@ fn encode_message(
     // Determine the message source and read it
     let message = if let Some(file_path) = message_file {
         // Read from file
-        fs::read(file_path).unwrap_or_else(|_| panic!("Failed to read message file: {}",
-            file_path.display()))
+        fs::read(file_path)
+            .unwrap_or_else(|_| panic!("Failed to read message file: {}", file_path.display()))
     } else {
         // Use the message from the command line
         message_text.as_bytes().to_vec()

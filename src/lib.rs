@@ -4,13 +4,13 @@
 //! (BLTM) method for hiding messages within images. This library provides functionality to
 //! encode messages into images and decode them back without visible changes to the image.
 
+pub mod api;
 pub mod bltm;
 pub mod decoder;
 pub mod encoder;
 pub mod error;
 pub mod img;
 pub mod utils;
-pub mod api;
 
 /// The result type returned by functions in this library.
 pub type Result<T> = std::result::Result<T, error::HideError>;
