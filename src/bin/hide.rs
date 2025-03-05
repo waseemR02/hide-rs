@@ -46,11 +46,11 @@ enum Commands {
         /// Display output as hexadecimal for binary data
         #[arg(short, long)]
         hex: bool,
-        
+
         /// Extract raw data regardless of header format validity
         #[arg(short, long, help = "Extract raw data without header validation")]
         raw: bool,
-        
+
         /// Save output to file instead of displaying
         #[arg(short, long)]
         output: Option<PathBuf>,
@@ -69,7 +69,12 @@ fn main() {
         } => {
             encode_message(image, message, output, file);
         }
-        Commands::Decode { image, hex, raw, output } => {
+        Commands::Decode {
+            image,
+            hex,
+            raw,
+            output,
+        } => {
             decode_message(image, *hex, *raw, output);
         }
     }
@@ -106,13 +111,18 @@ fn encode_message(
 }
 
 /// Decode a message from an image and display it in the console
-fn decode_message(image_path: &PathBuf, show_hex: bool, raw_mode: bool, output_file: &Option<PathBuf>) {
+fn decode_message(
+    image_path: &PathBuf,
+    show_hex: bool,
+    raw_mode: bool,
+    output_file: &Option<PathBuf>,
+) {
     println!("Extracting hidden message from: {}", image_path.display());
-    
+
     // Load the stego image
-    let stego_image = hide_rs::img::StegoImage::from_file(image_path)
-        .expect("Failed to load image");
-    
+    let stego_image =
+        hide_rs::img::StegoImage::from_file(image_path).expect("Failed to load image");
+
     let decoded_message = if raw_mode {
         // Use raw decoder to extract all data without header validation
         println!("Using raw extraction mode (ignoring header format)");
@@ -120,26 +130,27 @@ fn decode_message(image_path: &PathBuf, show_hex: bool, raw_mode: bool, output_f
     } else {
         // Use standard decoder
         let decoder = create_decoder();
-        decoder.decode(&stego_image).expect("Failed to decode message")
+        decoder
+            .decode(&stego_image)
+            .expect("Failed to decode message")
     };
-    
+
     println!("Message size: {} bytes", decoded_message.len());
 
     // Save to file if output was specified
     if let Some(output_path) = output_file {
-        fs::write(output_path, &decoded_message)
-            .expect("Failed to write output file");
+        fs::write(output_path, &decoded_message).expect("Failed to write output file");
         println!("Output written to: {}", output_path.display());
-        
+
         if raw_mode {
             // Also generate and display a data preview
             let preview = raw_decoder::format_data_preview(&decoded_message, 32);
             println!("\n{}", preview);
         }
-        
+
         return; // Don't display content when saving to file
     }
-    
+
     // Display content according to mode and type
     if raw_mode {
         // In raw mode, always show data analysis

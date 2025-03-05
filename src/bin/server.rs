@@ -81,8 +81,9 @@ async fn main() -> io::Result<()> {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
-    use actix_web::{test, App};
+    
+    use actix_web::{test, web, App};
+    use hide_rs::api::handlers::HealthResponse;
     use hide_rs::api::routes::{health_check, ping};
 
     #[actix_web::test]
